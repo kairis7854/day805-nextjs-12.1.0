@@ -1,13 +1,11 @@
+import Head from 'next/head'
 
-
-
-export default function Page() {
+export default function Home() {
   return (
-    <div>000000000000000</div>
+    <div >
+
+
+
+    </div>
   )
-
 }
-
-
-
-

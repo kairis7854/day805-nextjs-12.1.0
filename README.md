@@ -17,6 +17,10 @@ Next.js\
 2.[數據獲取](#數據獲取)\
 3.[css相關](#css相關)\
 4.[Layout](#Layout)\
+5.[圖片優化](#圖片優化)\
+6.[字體優化](#字體優化)\
+7.[public資料夾](#public資料夾)\
+
 進階\
 1.[動態路由](#動態路由)\
 
@@ -322,3 +326,66 @@ export default function MyApp({ Component, pageProps }) {
 }
 ```
 ↑ 多種 layout。getLayout 的使用
+
+## 圖片優化 
+```js
+import Image from 'next/image'
+import profilePic from '../public/me.png'
+
+function Home() {
+  return (
+    <>
+      <h1>My Homepage</h1>
+      <Image
+        src={profilePic}
+        alt="Picture of the author"
+        // width={500} automatically provided
+        // height={500} automatically provided
+        // blurDataURL="data:..." automatically provided
+        // placeholder="blur" // Optional blur-up while loading
+      />
+      <p>Welcome to my homepage!</p>
+    </>
+  )
+}
+```
+↑ 引入本地圖片
+## 字體優化 
+```js
+// pages/_document.js
+
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+class MyDocument extends Document {
+  render() {
+    return (
+      <Html>
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+            rel="stylesheet"
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
+}
+
+export default MyDocument
+```
+↑ 引入方式
+```js
+// next.config.js
+
+module.exports = {
+  optimizeFonts: false,
+}
+```
+↑ 禁用方式
+## public資料夾
+Next.js 提供了 public 資料夾放專門靜態資料，例如 robots.txt、favicon.ico、my.html等等\
+注意：public名稱不能更改

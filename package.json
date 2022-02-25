@@ -9,7 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.5",
+    "@next-auth/firebase-adapter": "^0.0.2-canary.207",
+    "firebase": "^8.10.1",
+    "install": "^0.13.0",
     "next": "12.1.0",
+    "next-auth": "^3.29.0",
+    "npm": "^8.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },

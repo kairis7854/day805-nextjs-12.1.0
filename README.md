@@ -20,9 +20,22 @@ Next.js\
 5.[圖片優化](#圖片優化)\
 6.[字體優化](#字體優化)\
 7.[public資料夾](#public資料夾)\
-
 進階\
 1.[動態路由](#動態路由)\
+
+下方功能使用到 Google-Cloud-Platform。試用3個月，之後收費。依需求學習\
+註：時間 2022/2/25， next-auth/firebase-adapter 可使用環境為 next-auth v3 與 firebase v8\
+NextAuth\
+[筆記 NextAuth](#筆記-NextAuth)\
+Firebase-authentication\
+[筆記 Firebase-authentication](#筆記-Firebase-authentication)\
+Google-Cloud-Platform\
+[筆記 Google-Cloud-Platform](#筆記-Google-Cloud-Platform)
+
+heroIcon\
+[筆記 heroIcons](#筆記-heroIcons)
+
+
 
 ## 基本
 ## 安裝
@@ -350,6 +363,20 @@ function Home() {
 }
 ```
 ↑ 引入本地圖片
+```js
+import Image from 'next/image'
+
+function Header() {
+    return (
+        <div className=''>
+            <Image src='/images/logo.svg' width={80} height={80} className=''/>
+        </div>
+    )
+}
+
+export default Header
+```
+↑ 補充。在 src='/images/logo.svg' 屬性中，直接取 public 路徑下的圖片
 ## 字體優化 
 ```js
 // pages/_document.js
@@ -389,3 +416,128 @@ module.exports = {
 ## public資料夾
 Next.js 提供了 public 資料夾放專門靜態資料，例如 robots.txt、favicon.ico、my.html等等\
 注意：public名稱不能更改
+
+
+
+## 筆記 NextAuth
+官網 https://next-auth.js.org/
+
+安裝
+```js
+npm install --save next-auth
+```
+```js
+//pages/api/auth/[...nextauth].js
+
+import NextAuth from "next-auth"
+import GithubProvider from "next-auth/providers/github"
+
+export default NextAuth({
+  // Configure one or more authentication providers
+  providers: [
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+    // ...add more providers here
+  ],
+})
+```
+↑ 指定位置，創建 `[...nextauth].js`
+```js
+//.env.local
+GOOGLE_ID=xxxxxxxxxxxxxxxxxxxxxxx
+GOOGLE_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+//由 筆記 Firebase-authentication 第五步 獲得 ID 與 金鑰
+```
+↑ 根目錄創建 `.env.local`
+
+\
+Adapters 使用
+```js
+npm install @next-auth/firebase-adapter@canary
+```
+↑安裝
+```js
+import NextAuth from "next-auth"
+import Providers from "next-auth/providers"
+//引入 Adapter 和 db
+import { FirebaseAdapter } from "@next-auth/firebase-adapter"
+import { db } from '../../../firebase'
+
+export default NextAuth({
+  providers: [
+    Providers.Google({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+  ],
+
+  //配置
+  adapter: FirebaseAdapter(db),
+})
+```
+↑使用
+## 筆記 Firebase-authentication
+官網 https://console.firebase.google.com/
+
+註：next-auth/firebase-adapter 使用環境為 next-auth v3 與 firebase v8\
+安裝
+```js
+npm install firebase
+```
+1.官網>新增專案(輸入名稱)>google分析不勾選>確定\
+2.官網>選專案設定(齒輪圖案)>選網頁程式(</>圖案)>輸入名稱>Hosting不勾選(用別的發佈)\
+3.官網>回專案設定(齒輪圖案)>複製金鑰
+```js
+//這是金鑰
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "day805-nextjs.firebaseapp.com",
+  projectId: "day805-nextjs",
+  storageBucket: "day805-nextjs.appspot.com",
+  messagingSenderId: "",
+  appId: ""
+};
+```
+4.本地repo>根目錄創 firebase.js
+```js
+//firebase.js
+import firebase from 'firebase'
+
+const firebaseConfig = {
+    apiKey: "",
+    authDomain: "day805-nextjs.firebaseapp.com",
+    projectId: "day805-nextjs",
+    storageBucket: "day805-nextjs.appspot.com",
+    messagingSenderId: "",
+    appId: ""
+};
+
+const app = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const db = app.firestore();
+
+export { db };
+```
+5.官網>進入 authentication>選擇 google 驗證>選擇啟用>將 Web SDK 的 ID 與金鑰帶入本地 `.env.local`文件內
+
+## 筆記 Google-Cloud-Platform
+選擇專案>選擇 credentials>選擇 OAuth 2.0>\
+1.JS授權內>URLs 添加 http://localhost:3000\
+2.重定URL內>URLs 添加 the redirect URL in the request 給的網址
+```js
+import { signIn } from 'next-auth/client'
+//signIn 執行後的彈窗內容 the redirect URL in the request：網址
+```
+
+## 筆記 heroIcons
+官網 https://heroicons.com/
+
+安裝
+```js
+npm install @heroicons/react
+```

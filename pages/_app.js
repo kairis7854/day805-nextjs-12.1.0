@@ -1,6 +1,14 @@
-export default function MyApp({ Component, pageProps }) {
-  // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout || ((page) => page)
+import "tailwindcss/tailwind.css";
+import "../styles/globals.css";
+// import { Provider } from "next-auth/client";
 
-  return getLayout(<Component {...pageProps} />)
+
+function MyApp({ Component, pageProps }) {
+  return (
+    // <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    // </Provider>
+  );
 }
+
+export default MyApp;

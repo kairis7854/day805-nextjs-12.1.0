@@ -23,8 +23,7 @@ Next.js\
 進階\
 1.[動態路由](#動態路由)\
 
-下方功能使用到 Google-Cloud-Platform。試用3個月，之後收費。依需求學習\
-註：時間 2022/2/25， next-auth/firebase-adapter 可使用環境為 next-auth v3 與 firebase v8\
+註：next-auth/firebase-adapter 使用環境為 next-auth v3 與 firebase v8\
 NextAuth\
 [筆記 NextAuth](#筆記-NextAuth)\
 Firebase-authentication\
@@ -32,6 +31,8 @@ Firebase-authentication\
 Google-Cloud-Platform\
 [筆記 Google-Cloud-Platform](#筆記-Google-Cloud-Platform)
 
+react-responsive-carousel\
+[筆記 react-responsive-carousel](#筆記-react-responsive-carousel)\
 heroIcon\
 [筆記 heroIcons](#筆記-heroIcons)
 
@@ -453,6 +454,45 @@ GOOGLE_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 ↑ 根目錄創建 `.env.local`
 
+```js
+//_app.js
+import { Provider } from "next-auth/client";
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    </Provider>
+  );
+}
+
+export default MyApp;
+
+//index.js
+import { useSession } from 'next-auth/client'
+
+export default function Home() {
+  const {session} = useSession()
+
+  return (
+    <div >
+        ...
+    </div>
+  )
+}
+
+export async function getServerSideProps(content) {
+  const session = await getSession(content)
+
+  return {
+    props: {
+      session,
+    }
+  }
+}
+```
+↑ 分享 session
+
 \
 Adapters 使用
 ```js
@@ -482,7 +522,6 @@ export default NextAuth({
 ## 筆記 Firebase-authentication
 官網 https://console.firebase.google.com/
 
-註：next-auth/firebase-adapter 使用環境為 next-auth v3 與 firebase v8\
 安裝
 ```js
 npm install firebase
@@ -526,14 +565,30 @@ export { db };
 5.官網>進入 authentication>選擇 google 驗證>選擇啟用>將 Web SDK 的 ID 與金鑰帶入本地 `.env.local`文件內
 
 ## 筆記 Google-Cloud-Platform
-選擇專案>選擇 credentials>選擇 OAuth 2.0>\
+選擇專案>選擇 API 和服務>選擇憑證>選擇 OAuth 2.0 內的 Web client >\
 1.JS授權內>URLs 添加 http://localhost:3000\
-2.重定URL內>URLs 添加 the redirect URL in the request 給的網址
+2.重定URL內>URLs 添加下方代碼給的網址
 ```js
 import { signIn } from 'next-auth/client'
 //signIn 執行後的彈窗內容 the redirect URL in the request：網址
 ```
+3.修改 .env.local
+```js
+//.env.local
+GOOGLE_ID=xxxxxxxxxxx
+GOOGLE_SECRET=xxxxxxxxxxxx
+NEXTAUTH_URL=http://localhost:3000
 
+HOST=http://localhost:3000
+```
+
+## 筆記 react-responsive-carousel
+官網 https://www.npmjs.com/package/react-responsive-carousel
+
+安裝
+```js
+npm install react-responsive-carousel
+```
 ## 筆記 heroIcons
 官網 https://heroicons.com/
 

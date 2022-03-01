@@ -33,6 +33,10 @@ Google-Cloud-Platform\
 
 react-responsive-carousel\
 [筆記 react-responsive-carousel](#筆記-react-responsive-carousel)\
+react-player \
+[筆記 react-player ](#筆記-react-player)\
+tailwind-scrollbar-hide\
+[筆記 tailwind-scrollbar-hide](#筆記-tailwind-scrollbar-hide)\
 heroIcon\
 [筆記 heroIcons](#筆記-heroIcons)
 
@@ -588,6 +592,64 @@ HOST=http://localhost:3000
 安裝
 ```js
 npm install react-responsive-carousel
+```
+## 筆記 tailwind-scrollbar-hide
+官網 https://www.npmjs.com/package/tailwind-scrollbar-hide
+
+安裝
+```js
+tailwind-scrollbar-hide
+```
+配置
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    require('tailwind-scrollbar-hide')
+    // ...
+  ]
+}
+```
+使用
+```js
+<div class="w-4 scrollbar-hide">...</div>
+```
+## 筆記 react-player 
+官網 https://www.npmjs.com/package/react-player
+
+安裝
+```js
+npm install react-player 
+```
+使用
+```js
+class ResponsivePlayer extends Component {
+  render () {
+    return (
+      <div className='player-wrapper'>
+        <ReactPlayer
+          className='react-player'
+          url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+          width='100%'
+          height='100%'
+        />
+      </div>
+    )
+  }
+}
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 ```
 ## 筆記 heroIcons
 官網 https://heroicons.com/

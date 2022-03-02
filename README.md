@@ -570,7 +570,8 @@ export { db };
 
 ## 筆記 Google-Cloud-Platform
 選擇專案>選擇 API 和服務>選擇憑證>選擇 OAuth 2.0 內的 Web client >\
-1.JS授權內>URLs 添加 http://localhost:3000\
+1.JS授權內>URLs 添加 http://localhost:3000
+
 2.重定URL內>URLs 添加下方代碼給的網址
 ```js
 import { signIn } from 'next-auth/client'
@@ -598,7 +599,7 @@ npm install react-responsive-carousel
 
 安裝
 ```js
-tailwind-scrollbar-hide
+npm install tailwind-scrollbar-hide
 ```
 配置
 ```js

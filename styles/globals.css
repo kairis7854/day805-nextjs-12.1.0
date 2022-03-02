@@ -11,7 +11,7 @@
     }
     
     body {
-        @apply bg-[#040714] text-[#f9f9f9] font-body;
+        @apply bg-[#040714] text-[#f9f9f9] font-body scrollbar-hide;
     }
 }
 

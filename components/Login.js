@@ -13,6 +13,8 @@ function Login() {
           src="/images/hero-background.jpg"
           layout="fill"
           objectFit="cover"
+          alt='Image'
+          priority
         />
       </div>
       <div className="flex justify-center items-center">
@@ -22,6 +24,7 @@ function Login() {
             width="600"
             height="150"
             objectFit="contain"
+            alt='Image'
           />
           <button className="bg-blue-600 uppercase text-xl tracking-wide font-extrabold py-4 px-6 w-full rounded hover:bg-[#0485ee]">
             Get all there
@@ -36,6 +39,7 @@ function Login() {
             width="600"
             height="70"
             objectFit="contain"
+            alt='Image'
           />
         </div>
       </div>

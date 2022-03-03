@@ -20,6 +20,7 @@ Next.js\
 5.[圖片優化](#圖片優化)\
 6.[字體優化](#字體優化)\
 7.[public資料夾](#public資料夾)\
+8.[ESLint](#ESLint)\
 進階\
 1.[動態路由](#動態路由)\
 
@@ -421,8 +422,18 @@ module.exports = {
 ## public資料夾
 Next.js 提供了 public 資料夾放專門靜態資料，例如 robots.txt、favicon.ico、my.html等等\
 注意：public名稱不能更改
-
-
+## ESLint
+```js
+//.eslintrc
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "@next/next/no-img-element": "off"
+    // Other rules
+  }
+}
+```
+↑ 添加規則
 
 ## 筆記 NextAuth
 官網 https://next-auth.js.org/

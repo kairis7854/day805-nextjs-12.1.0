@@ -21,6 +21,7 @@ function Header() {
                 height={80}
                 className='cursor-pointer'
                 onClick={() => { router.push('/') }}
+                alt='Image'
             />
             {
                 session && (
@@ -42,11 +43,11 @@ function Header() {
                             <span className="span">Originals</span>
                         </a>
                         <a className="header-link group">
-                            <img src="/images/movie-icon.svg" alt="" className="h-5" />
+                            <img src="/images/movie-icon.svg" className="h-5" alt='Image'/>
                             <span className="span">Movies</span>
                         </a>
                         <a className="header-link group">
-                            <img src="/images/series-icon.svg" alt="" className="h-5" />
+                            <img src="/images/series-icon.svg" className="h-5" alt='Image'/>
                             <span className="span">Series</span>
                         </a>
                     </div>
@@ -61,7 +62,7 @@ function Header() {
                         Login</button>
                 ) : (
                     <div className='ml-auto relative h-12 w-12 cursor-pointer' onClick={signOut}>
-                        <img src={session.user.image} className="h-12 w-12 rounded-full object-cover " />
+                        <img src={session.user.image} className="h-12 w-12 rounded-full object-cover " alt='Image' />
                         <div className='absolute text-[12px] bottom-[-3px] left-[50%] translate-x-[-50%] '>SignOut</div>
                     </div>
 

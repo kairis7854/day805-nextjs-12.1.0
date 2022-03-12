@@ -1,9 +1,10 @@
 # Next.js 12.1.0
 
 ## DEMO
-連結：
-
+連結：https://day805-nextjs-12-1-0-osacg46o0-kairis7854.vercel.app/
+![image](Readme.png)
 <br>
+
 
 ## 筆記：Next.js 12.1.0
 
@@ -30,7 +31,9 @@ NextAuth\
 Firebase-authentication\
 [筆記 Firebase-authentication](#筆記-Firebase-authentication)\
 Google-Cloud-Platform\
-[筆記 Google-Cloud-Platform](#筆記-Google-Cloud-Platform)
+[筆記 Google-Cloud-Platform](#筆記-Google-Cloud-Platform)\
+Vercel\
+[筆記 Vercel](#筆記-Vercel)
 
 react-responsive-carousel\
 [筆記 react-responsive-carousel](#筆記-react-responsive-carousel)\
@@ -63,8 +66,8 @@ export default About
 ↑ pages資料夾下的檔案，會變成路由檔案。例如，在網址欄輸入 /about 得到對應 pages/about.js 的頁面
 
 動態路由\
-pages資料夾下含 [ ] 中括號的，例如 pages/posts/[id].js ，代表可匹配網址為 /posts/1、/posts/2、/post/abc 等等頁面\
-更多請參考：1.[動態路由](#動態路由)
+pages資料夾下含 [ ] 中括號的，例如 pages/posts/[id].js ，代表可匹配網址為 /posts/1、/posts/2、/post/abc 等等頁面
+
 
 Next.js 預渲染分兩種\
 靜態生成(推薦)：HTML 生成在 build 時間，並且重複使用即使在每次請求時\
@@ -581,9 +584,10 @@ export { db };
 
 ## 筆記 Google-Cloud-Platform
 選擇專案>選擇 API 和服務>選擇憑證>選擇 OAuth 2.0 內的 Web client >\
-1.JS授權內>URLs 添加 http://localhost:3000
+1.JS授權內>URLs 添加 http://localhost:3000 與託管網址 https://day805-nextjs-12-1-0-osacg46o0-kairis7854.vercel.app
 
-2.重定URL內>URLs 添加下方代碼給的網址
+2.重定URL內>URLs 添加下方代碼給的網址 http://localhost:3000/api/auth/callback/google 
+與託管網址 https://day805-nextjs-12-1-0-osacg46o0-kairis7854.vercel.app/api/auth/callback/google
 ```js
 import { signIn } from 'next-auth/client'
 //signIn 執行後的彈窗內容 the redirect URL in the request：網址
@@ -597,6 +601,15 @@ NEXTAUTH_URL=http://localhost:3000
 
 HOST=http://localhost:3000
 ```
+
+## 筆記 Vercel
+官網 https://vercel.com/
+
+1.選擇專案\
+2.將 .env 內資料添加到 Environment Variables\
+3.發佈\
+4.Environment Variables 再添加 NEXTAUTH_URL 值為託管網址 https://day805-nextjs-12-1-0-osacg46o0-kairis7854.vercel.app/
+
 
 ## 筆記 react-responsive-carousel
 官網 https://www.npmjs.com/package/react-responsive-carousel
